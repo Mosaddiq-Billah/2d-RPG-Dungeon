@@ -162,6 +162,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
+    Android: com.DefaultCompany.dungeonadventurerpg2dmain
     Standalone: com.DefaultCompany.dungeon-adventure-rpg-2d-main
   buildNumber:
     Standalone: 0
