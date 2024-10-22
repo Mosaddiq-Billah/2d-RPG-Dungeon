@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         pspeed = speed;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
+
         // Deactivate the hitbox
         hitbox.SetActive(false);
         offset = rightOffset;
