@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -24,6 +25,12 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 leftOffset = new Vector3(-1.3f, -1.6f, 0f);
     public Vector3 rightOffset = new Vector3(1.5f, -1.6f, 0f);
 
+
+    //Joystick
+    public Joystick Joystick;
+    public GameObject aimGameObject;
+    
+
     void Start()
     {
         pspeed = speed;
@@ -37,8 +44,27 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        float verticalInput = Input.GetAxis("Vertical");
-        float horizontalInput = Input.GetAxis("Horizontal");
+
+        if (counter)
+        {
+            aimGameObject.SetActive(false);
+        }
+
+        if (!counter)
+        {
+            animator.SetBool("IsAttacking", false);
+            hitbox.SetActive(false);
+            aimGameObject.SetActive(true);
+        }
+
+        
+
+
+
+        //float verticalInput = Input.GetAxis("Vertical");
+        float verticalInput = Joystick.Vertical;
+        //float horizontalInput = Input.GetAxis("Horizontal");
+        float horizontalInput = Joystick.Horizontal;
 
         // Movement
         transform.Translate(new Vector3(horizontalInput, verticalInput, 0f) * speed * Time.deltaTime);
@@ -102,5 +128,25 @@ public class PlayerMovement : MonoBehaviour
             lastInputWasUp = false;
             offset = downOffset;
         }
+    }
+
+    bool counter = false;
+    public void SwordAttack()
+    {
+        counter = true;
+        aimGameObject.SetActive(false);
+        // isAttacking removed as it's not used
+        animator.SetBool("IsAttacking", true);
+        hitbox.SetActive(true);
+
+        StartCoroutine(delay());
+
+    }
+
+    IEnumerator delay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        counter = false;
+        yield return null;
     }
 }
