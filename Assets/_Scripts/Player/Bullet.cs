@@ -17,6 +17,7 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
+
         if (Time.time >= timeToDeactivate)
         {
             gameObject.SetActive(false);

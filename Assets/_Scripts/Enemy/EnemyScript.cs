@@ -37,6 +37,8 @@ public class EnemyScript : MonoBehaviour, IDamageable
 
     private void Update()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
         if (isKnockedBack)
         {
             if (Time.time >= knockbackEndTime)
@@ -57,7 +59,7 @@ public class EnemyScript : MonoBehaviour, IDamageable
 
     private void UpdatePath()
     {
-        path = pathfinding.FindPath(transform.position, player.position);
+        path = pathfinding.FindPath(gameObject.transform.position, player.position);
         currentPathIndex = 0;
     }
 
