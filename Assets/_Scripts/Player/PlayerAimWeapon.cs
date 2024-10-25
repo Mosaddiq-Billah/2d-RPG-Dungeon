@@ -12,8 +12,12 @@ public class PlayerAimWeapon : MonoBehaviour
     private float nextFireTime = 0f; // Time when the player can fire next
     private ObjectPool bulletPool;
 
+    private AudioSource gunfire;
+    
     void Start()
     {
+        gunfire = GetComponent<AudioSource>();
+
         // Log the initial bulletPrefab assignment
         if (bulletPrefab != null)
         {
@@ -34,8 +38,17 @@ public class PlayerAimWeapon : MonoBehaviour
         // Allow continuous shooting while Fire1 button is held down
         if (Input.GetButton("Fire1") && Time.time > nextFireTime)
         {
+            if (PlayerPrefs.GetInt("SoundEffects") == 0)
+            {
+                gunfire.Play();
+            }
             nextFireTime = Time.time + (1 / fireRate);
             Shoot();
+        }
+
+        if (!Input.GetButton("Fire1"))
+        {
+            gunfire.Stop();
         }
     }
 
@@ -51,6 +64,8 @@ public class PlayerAimWeapon : MonoBehaviour
 
     void Shoot()
     {
+        
+
         if (bulletPrefab == null)
         {
             Debug.LogError("Bullet prefab is missing when trying to shoot.");
