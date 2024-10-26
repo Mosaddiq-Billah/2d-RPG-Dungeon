@@ -67,9 +67,66 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         tilemapVisualizer.PaintFloorTiles(floor);
         WallGenerator.CreateWalls(floor, tilemapVisualizer);
 
-        playerPrefab.position = roomsList[0].center;
+        /*playerPrefab.position = roomsList[0].center;
+        onfloor = PlayerBoundary.instance.IsOnFloorOnStart();*/
+
+        
+            /*for (int i = 1; i<12; i++)
+            {
+                playerPrefab.position = roomsList[i].center;
+                onfloor = PlayerBoundary.instance.IsOnFloorOnStart();
+                
+                if (onfloor)
+                {
+                Debug.Log("Player has been assigned to a location");
+                    break;
+                }
+            }*/
+
+        
+
+        /*if (!onfloor)
+        {
+            playerPrefab.position = roomsList[1].center;
+            onfloor = PlayerBoundary.instance.IsOnFloorOnStart();
+            if (!onfloor)
+            {
+                playerPrefab.position = roomsList[2].center;
+            }
+        }*/
+
         PlaceBossInFarthestRoom();
     }
+    bool onfloor;
+    public bool counter;
+
+    private void Update()
+    {
+        
+        if (!counter)
+        {
+            if (!PlayerBoundary.instance.IsOnFloorOnStart())
+            {
+                for (int i = 1; i < 5; i++)
+                {
+                    Debug.Log("VALUE OF COUNTER IN START: " + counter);
+                    playerPrefab.position = roomOrigins[i].center;
+                    if (PlayerBoundary.instance.IsOnFloorOnStart())
+                    {
+                        Debug.Log("VALUE OF COUNTER IS TRUE");
+                        
+                        break;
+                    }
+                }
+                counter = true;
+            }
+        }
+        else
+        {
+
+        }
+    }
+
 
     private void GenerateCoins()
     {
