@@ -11,6 +11,7 @@ TagManager:
   - Bullet
   - HealthPotion
   - Boss
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - wallss
   - 
   - Aim
-  - 
+  - floor
   - 
   - 
   - 
