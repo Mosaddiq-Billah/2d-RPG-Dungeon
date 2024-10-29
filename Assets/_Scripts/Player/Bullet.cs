@@ -45,7 +45,18 @@ public class Bullet : MonoBehaviour
             // Do not destroy the bullet if it hits non-enemy objects
         }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            gameObject.SetActive(false);
+        }
+    }
 }
+
+
+
 
 public interface IDamageable
 {
